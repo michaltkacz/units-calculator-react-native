@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const CalculatorScreen = () => {
+const CalculatorScreen: React.FC = () => {
   return (
-    <View>
+    <View style={styles.view}>
       <Text>calculator</Text>
     </View>
   );
@@ -11,4 +12,4 @@ const CalculatorScreen = () => {
 
 export default CalculatorScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({ view: { top: 20 } });

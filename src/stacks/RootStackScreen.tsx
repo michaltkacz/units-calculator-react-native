@@ -6,9 +6,16 @@ import CalculatorScreen from '../screens/CalculatorScreen';
 
 const RootStack = createStackNavigator();
 
-const RootStackScreen = () => {
+const RootStackScreen: React.FC = () => {
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      initialRouteName='Categories'
+      screenOptions={{
+        headerShown: false,
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: 'tomato' },
+      }}
+    >
       <RootStack.Screen name='Categories' component={CategoriesScreen} />
       <RootStack.Screen name='Calculator' component={CalculatorScreen} />
     </RootStack.Navigator>
