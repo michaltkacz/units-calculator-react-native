@@ -8,6 +8,7 @@ import { Title } from 'react-native-paper';
 import { RootStackCategoriesProps, Routes } from '../stacks/RootStackScreen';
 import Grid from '../components/Grid';
 import CategoryButton from './../components/CategoryButton';
+import { UnitsCategories } from '../data/unitsSchema';
 
 const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
   navigation,
@@ -24,7 +25,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
               icon='straighten'
               onPress={() =>
                 navigation.navigate(Routes.Calculator, {
-                  categoryType: 'length',
+                  unitsCategory: UnitsCategories.Length,
                 })
               }
             />
@@ -35,7 +36,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
               icon='square-foot'
               onPress={() =>
                 navigation.navigate(Routes.Calculator, {
-                  categoryType: 'area',
+                  unitsCategory: UnitsCategories.Area,
                 })
               }
             />
@@ -48,7 +49,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
               icon='opacity'
               onPress={() =>
                 navigation.navigate(Routes.Calculator, {
-                  categoryType: 'volume',
+                  unitsCategory: UnitsCategories.Volume,
                 })
               }
             />
@@ -59,7 +60,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
               icon='fitness-center'
               onPress={() =>
                 navigation.navigate(Routes.Calculator, {
-                  categoryType: 'mass',
+                  unitsCategory: UnitsCategories.Mass,
                 })
               }
             />
@@ -72,7 +73,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
               icon='timer'
               onPress={() =>
                 navigation.navigate(Routes.Calculator, {
-                  categoryType: 'time',
+                  unitsCategory: UnitsCategories.Time,
                 })
               }
             />
@@ -83,7 +84,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
               icon='speed'
               onPress={() =>
                 navigation.navigate(Routes.Calculator, {
-                  categoryType: 'speed',
+                  unitsCategory: UnitsCategories.Speed,
                 })
               }
             />

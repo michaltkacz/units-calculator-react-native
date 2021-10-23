@@ -7,6 +7,8 @@ import {
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CalculatorScreen from '../screens/CalculatorScreen';
 
+import { UnitsCategories } from '../data/unitsSchema';
+
 export enum Routes {
   Categories = 'Categories',
   Calculator = 'Calculator',
@@ -14,7 +16,7 @@ export enum Routes {
 
 export type RootStackParamsList = {
   [Routes.Categories]: undefined;
-  [Routes.Calculator]: { categoryType: string };
+  [Routes.Calculator]: { unitsCategory: UnitsCategories };
 };
 
 export type RootStackCategoriesProps = StackScreenProps<
