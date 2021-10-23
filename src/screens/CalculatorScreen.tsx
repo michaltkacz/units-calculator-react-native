@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const CalculatorScreen: React.FC = () => {
+import { RootStackCalculatorProps } from '../stacks/RootStackScreen';
+
+const CalculatorScreen: React.FC<RootStackCalculatorProps> = () => {
   return (
     <View style={styles.view}>
       <Text>calculator</Text>

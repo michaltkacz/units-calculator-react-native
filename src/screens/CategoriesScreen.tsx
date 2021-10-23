@@ -1,11 +1,17 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Text, Title } from 'react-native-paper';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { Title } from 'react-native-paper';
+
+import { RootStackCategoriesProps, Routes } from '../stacks/RootStackScreen';
 import Grid from '../components/Grid';
 import CategoryButton from './../components/CategoryButton';
 
-const CategoriesScreen: React.FC = () => {
+const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
+  navigation,
+}) => {
   return (
     <SafeAreaView style={styles.view}>
       <Title style={styles.title}>Units</Title>
@@ -13,26 +19,74 @@ const CategoriesScreen: React.FC = () => {
       <Grid>
         <Grid.Row>
           <Grid.Col>
-            <CategoryButton />
+            <CategoryButton
+              title='length'
+              icon='straighten'
+              onPress={() =>
+                navigation.navigate(Routes.Calculator, {
+                  categoryType: 'length',
+                })
+              }
+            />
           </Grid.Col>
           <Grid.Col>
-            <CategoryButton />
+            <CategoryButton
+              title='area'
+              icon='square-foot'
+              onPress={() =>
+                navigation.navigate(Routes.Calculator, {
+                  categoryType: 'area',
+                })
+              }
+            />
           </Grid.Col>
         </Grid.Row>
         <Grid.Row>
           <Grid.Col>
-            <CategoryButton />
+            <CategoryButton
+              title='volume'
+              icon='opacity'
+              onPress={() =>
+                navigation.navigate(Routes.Calculator, {
+                  categoryType: 'volume',
+                })
+              }
+            />
           </Grid.Col>
           <Grid.Col>
-            <CategoryButton />
+            <CategoryButton
+              title='mass'
+              icon='fitness-center'
+              onPress={() =>
+                navigation.navigate(Routes.Calculator, {
+                  categoryType: 'mass',
+                })
+              }
+            />
           </Grid.Col>
         </Grid.Row>
         <Grid.Row>
           <Grid.Col>
-            <CategoryButton />
+            <CategoryButton
+              title='time'
+              icon='timer'
+              onPress={() =>
+                navigation.navigate(Routes.Calculator, {
+                  categoryType: 'time',
+                })
+              }
+            />
           </Grid.Col>
           <Grid.Col>
-            <CategoryButton />
+            <CategoryButton
+              title='speed'
+              icon='speed'
+              onPress={() =>
+                navigation.navigate(Routes.Calculator, {
+                  categoryType: 'speed',
+                })
+              }
+            />
           </Grid.Col>
         </Grid.Row>
       </Grid>

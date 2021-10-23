@@ -1,23 +1,43 @@
 import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackScreenProps,
+} from '@react-navigation/stack';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CalculatorScreen from '../screens/CalculatorScreen';
 
-const RootStack = createStackNavigator();
+export enum Routes {
+  Categories = 'Categories',
+  Calculator = 'Calculator',
+}
+
+export type RootStackParamsList = {
+  [Routes.Categories]: undefined;
+  [Routes.Calculator]: { categoryType: string };
+};
+
+export type RootStackCategoriesProps = StackScreenProps<
+  RootStackParamsList,
+  Routes.Categories
+>;
+export type RootStackCalculatorProps = StackScreenProps<
+  RootStackParamsList,
+  Routes.Calculator
+>;
+
+const RootStack = createStackNavigator<RootStackParamsList>();
 
 const RootStackScreen: React.FC = () => {
   return (
     <RootStack.Navigator
-      initialRouteName='Categories'
+      initialRouteName={Routes.Categories}
       screenOptions={{
         headerShown: false,
-        headerTintColor: 'white',
-        headerStyle: { backgroundColor: 'tomato' },
       }}
     >
-      <RootStack.Screen name='Categories' component={CategoriesScreen} />
-      <RootStack.Screen name='Calculator' component={CalculatorScreen} />
+      <RootStack.Screen name={Routes.Categories} component={CategoriesScreen} />
+      <RootStack.Screen name={Routes.Calculator} component={CalculatorScreen} />
     </RootStack.Navigator>
   );
 };

@@ -1,17 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const CategoryButton = () => {
+interface CategoryButtonProps {
+  title: string;
+  icon: string;
+  onPress?: () => void;
+}
+
+const CategoryButton: React.FC<CategoryButtonProps> = ({
+  title,
+  icon,
+  onPress,
+}) => {
   return (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={() => console.log('Pressed')}
-    >
-      <Image
-        style={styles.buttonIcon}
-        source={{ uri: 'https://picsum.photos/200' }}
-      />
-      <Text style={styles.buttonText}>CATEGORY</Text>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+      <Icon name={icon} size={96} color='#000' />
+      <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -32,5 +37,10 @@ const styles = StyleSheet.create({
   },
 
   buttonIcon: { width: 96, height: 96 },
-  buttonText: { fontSize: 20, fontWeight: 'bold', color: 'purple' },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'purple',
+    textTransform: 'uppercase',
+  },
 });
