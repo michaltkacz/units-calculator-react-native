@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { RootStackCalculatorProps } from '../stacks/RootStackScreen';
 
@@ -48,29 +49,34 @@ const CalculatorScreen: React.FC<RootStackCalculatorProps> = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.view}>
-      {unitsCollection.map((unit: Unit, index) => (
-        <View style={styles.unitContainer} key={`unit-row-${index}`}>
-          <TextInput
-            value={calculateValue(currentUnitName, unit.name)}
-            style={styles.unitInput}
-            keyboardType='numeric'
-            onChangeText={(text) => {
-              if (text === '') {
-                setCurrentUnitValue('');
-                setCurrentUnitName(unit.name);
-                return;
-              }
+      <Text style={styles.title}>{unitsCategory}</Text>
+      <KeyboardAwareScrollView>
+        <View>
+          {unitsCollection.map((unit: Unit, index) => (
+            <View style={styles.unitContainer} key={`unit-row-${index}`}>
+              <TextInput
+                value={calculateValue(currentUnitName, unit.name)}
+                style={styles.unitInput}
+                keyboardType='numeric'
+                onChangeText={(text) => {
+                  if (text === '') {
+                    setCurrentUnitValue('');
+                    setCurrentUnitName(unit.name);
+                    return;
+                  }
 
-              // if is float number
-              if (/^-?(\d+\.?\d*)$|(\d*\.?\d+)$/.test(text)) {
-                setCurrentUnitValue(text);
-                setCurrentUnitName(unit.name);
-              }
-            }}
-          />
-          <Text style={styles.unitName}>{unit.name}</Text>
+                  // if is float number
+                  if (/^-?(\d+\.?\d*)$|(\d*\.?\d+)$/.test(text)) {
+                    setCurrentUnitValue(text);
+                    setCurrentUnitName(unit.name);
+                  }
+                }}
+              />
+              <Text style={styles.unitName}>{unit.name}</Text>
+            </View>
+          ))}
         </View>
-      ))}
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
@@ -79,6 +85,7 @@ export default CalculatorScreen;
 
 const styles = StyleSheet.create({
   view: { flex: 1, padding: 4 },
+  title: { fontSize: 60, textTransform: 'capitalize' },
   unitContainer: {
     flexDirection: 'row',
     alignContent: 'center',

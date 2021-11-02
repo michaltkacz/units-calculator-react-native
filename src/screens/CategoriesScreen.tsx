@@ -15,8 +15,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
 }) => {
   return (
     <SafeAreaView style={styles.view}>
-      <Title style={styles.title}>Units</Title>
-      <Title style={styles.title}>Calculator</Title>
+      <Title style={styles.title}>Units Calculator</Title>
       <Grid>
         <Grid.Row>
           <Grid.Col>
