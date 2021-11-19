@@ -1,10 +1,10 @@
 export enum UnitsCategories {
-  Length = 'length',
-  Mass = 'mass',
-  Speed = 'speed',
-  Volume = 'volume',
-  Time = 'time',
-  Area = 'area',
+  Length = 'Length',
+  Mass = 'Mass',
+  Speed = 'Speed',
+  Volume = 'Volume',
+  Time = 'Time',
+  Area = 'Area',
 }
 
 export type Unit = {
@@ -63,7 +63,7 @@ const unitsSchema: UnitsSchema = {
   ],
   [UnitsCategories.Time]: [
     { name: 's', value: 1.0 },
-    { name: 'ms', value: 0.0001 },
+    { name: 'ms', value: 0.001 },
     { name: 'μs', value: 0.0000001 },
     { name: 'ns', value: 1.0000000001 },
     { name: 'Min', value: 60.0 },
@@ -71,7 +71,7 @@ const unitsSchema: UnitsSchema = {
     { name: 'Day', value: 86400.0 },
     { name: 'Week', value: 604800.0 },
     { name: 'Month', value: 2629800.0 },
-    { name: 'Month', value: 31557600.0 },
+    { name: 'Year', value: 31557600.0 },
   ],
   [UnitsCategories.Area]: [
     { name: 'Square m', value: 1.0 },

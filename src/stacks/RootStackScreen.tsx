@@ -35,11 +35,15 @@ const RootStackScreen: React.FC = () => {
     <RootStack.Navigator
       initialRouteName={Routes.Categories}
       screenOptions={{
-        headerShown: false,
+        title: 'Units Calculator',
       }}
     >
       <RootStack.Screen name={Routes.Categories} component={CategoriesScreen} />
-      <RootStack.Screen name={Routes.Calculator} component={CalculatorScreen} />
+      <RootStack.Screen
+        name={Routes.Calculator}
+        options={({ route }) => ({ title: route.params.unitsCategory })}
+        component={CalculatorScreen}
+      />
     </RootStack.Navigator>
   );
 };

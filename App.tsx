@@ -1,15 +1,36 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from '@react-navigation/native';
+import {
+  DarkTheme as PaperDarkTheme,
+  DefaultTheme as PaperDefaultTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
 
 import RootStackScreen from './src/stacks/RootStackScreen';
 
+const CombinedDefaultTheme = {
+  ...NavigationDefaultTheme,
+  ...PaperDefaultTheme,
+  colors: {
+    ...NavigationDefaultTheme.colors,
+    ...PaperDefaultTheme.colors,
+    card: NavigationDefaultTheme.colors.primary,
+  },
+};
+
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <RootStackScreen />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <PaperProvider theme={CombinedDefaultTheme}>
+      <SafeAreaProvider>
+        <NavigationContainer theme={CombinedDefaultTheme}>
+          <RootStackScreen />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </PaperProvider>
   );
 }

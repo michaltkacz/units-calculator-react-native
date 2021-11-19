@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { List, TextInput } from 'react-native-paper';
 
+import DropDown from 'react-native-paper-dropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -17,19 +18,22 @@ const CalculatorScreen: React.FC<RootStackCalculatorProps> = ({ route }) => {
   const unitsCategory = route.params.unitsCategory as UnitsCategories;
   const unitsCollection = unitsSchema[unitsCategory] as UnitsCollection;
 
-  const [currentUnitName, setCurrentUnitName] = useState<string>(
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+
+  const [baseUnitName, setBaseUnitName] = useState<string>(
     unitsCollection[0].name
   );
-  const [currentUnitValue, setCurrentUnitValue] = useState<string>(
-    unitsCollection[0].value.toString()
-  );
+  const [baseUnitValue, setBaseUnitValue] = useState<string>('0');
 
-  const calculateValue = (fromUnitName: string, toUnitName: string): string => {
+  const calculateValue = (
+    fromUnitName: string,
+    toUnitName: string
+  ): string | null => {
     if (fromUnitName === toUnitName) {
-      return currentUnitValue;
+      return null;
     }
 
-    if (currentUnitValue === '') {
+    if (baseUnitValue === '') {
       return '';
     }
 
@@ -41,64 +45,87 @@ const CalculatorScreen: React.FC<RootStackCalculatorProps> = ({ route }) => {
       (unit) => unit.name === toUnitName
     )[0].value;
 
-    const currentUnitValueFloat = parseFloat(currentUnitValue);
+    const currentUnitValueFloat = parseFloat(baseUnitValue);
     const returnUnitValueFloat =
       (currentUnitValueFloat * fromUnitFactor) / toUnitFactor;
-    return returnUnitValueFloat.toString();
+    return returnUnitValueFloat.toFixed(9);
   };
 
   return (
-    <SafeAreaView style={styles.view}>
-      <Text style={styles.title}>{unitsCategory}</Text>
+    <View>
       <KeyboardAwareScrollView>
-        <View>
-          {unitsCollection.map((unit: Unit, index) => (
-            <View style={styles.unitContainer} key={`unit-row-${index}`}>
-              <TextInput
-                value={calculateValue(currentUnitName, unit.name)}
-                style={styles.unitInput}
-                keyboardType='numeric'
-                onChangeText={(text) => {
-                  if (text === '') {
-                    setCurrentUnitValue('');
-                    setCurrentUnitName(unit.name);
-                    return;
-                  }
-
-                  // if is float number
-                  if (/^-?(\d+\.?\d*)$|(\d*\.?\d+)$/.test(text)) {
-                    setCurrentUnitValue(text);
-                    setCurrentUnitName(unit.name);
-                  }
-                }}
-              />
-              <Text style={styles.unitName}>{unit.name}</Text>
-            </View>
-          ))}
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.unitValueInput}
+            mode='flat'
+            keyboardType='numeric'
+            defaultValue={baseUnitValue}
+            onChangeText={(text) => {
+              if (text === '') {
+                setBaseUnitValue('');
+                return;
+              }
+              // if is a float number
+              if (/^-?(\d+\.?\d*)$|(\d*\.?\d+)$/.test(text)) {
+                setBaseUnitValue(text);
+              }
+            }}
+          />
+          <View style={styles.unitDropDown}>
+            <DropDown
+              label='Base Unit'
+              mode='flat'
+              visible={showDropDown}
+              showDropDown={() => setShowDropDown(true)}
+              onDismiss={() => setShowDropDown(false)}
+              value={baseUnitName}
+              setValue={setBaseUnitName}
+              list={Object.values(unitsCollection).map((unit) => {
+                return { label: unit.name, value: unit.name };
+              })}
+            />
+          </View>
         </View>
+
+        <List.Section>
+          {unitsCollection.map((unit: Unit, index) => {
+            if (baseUnitName === unit.name) {
+              return null;
+            }
+            return (
+              <List.Item
+                key={`unit-row-${index}`}
+                title={calculateValue(baseUnitName, unit.name)}
+                titleStyle={{ textAlign: 'right' }}
+                right={() => (
+                  <Text
+                    style={{
+                      minWidth: 130,
+                      textAlignVertical: 'center',
+                      paddingLeft: 16,
+                    }}
+                  >
+                    {unit.name}
+                  </Text>
+                )}
+              ></List.Item>
+            );
+          })}
+        </List.Section>
       </KeyboardAwareScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default CalculatorScreen;
 
 const styles = StyleSheet.create({
-  view: { flex: 1, padding: 4 },
-  title: { fontSize: 60, textTransform: 'capitalize' },
-  unitContainer: {
-    flexDirection: 'row',
-    alignContent: 'center',
-    alignItems: 'center',
+  inputView: { flexDirection: 'row', padding: 4 },
+
+  unitValueInput: {
+    flex: 7,
   },
-  unitInput: {
-    flex: 0.8,
-    textAlign: 'right',
-  },
-  unitName: {
-    flex: 0.2,
-    fontSize: 20,
-    color: 'gray',
-    padding: 4,
+  unitDropDown: {
+    flex: 3,
   },
 });
