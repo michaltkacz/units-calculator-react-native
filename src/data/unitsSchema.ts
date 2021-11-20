@@ -5,6 +5,7 @@ export enum UnitsCategories {
   Volume = 'Volume',
   Time = 'Time',
   Area = 'Area',
+  Temperature = 'Temperature',
 }
 
 export type Unit = {
@@ -16,6 +17,48 @@ export type UnitsCollection = Array<Unit>;
 
 export type UnitsSchema = {
   [key in UnitsCategories]: UnitsCollection;
+};
+
+// const celsiusToKelvin = (value: number): number => {
+//   return value + 273.15;
+// };
+// const kelvinToCelsius = (value: number): number => {
+//   return value - 273.15;
+// };
+// const celsiusToFahrenheit = (value: number): number => {
+//   return ((value - 273.15) * 9) / 5 + 32;
+// };
+// const fahrenheitToCelsius = (value: number): number => {
+//   return ((value - 32) * 5) / 9;
+// };
+// const kelvinToFahrenheit = (value: number): number => {
+//   return celsiusToFahrenheit(kelvinToCelsius(value));
+// };
+// const fahrenheitToKelvin = (value: number): number => {
+//   return fahrenheitToCelsius(celsiusToKelvin(value));
+// };
+
+export enum TemperatureConversions {
+  CK = 'CK',
+  KC = 'KC',
+  CF = 'CF',
+  FC = 'FC',
+  KF = 'KF',
+  FK = 'FK',
+}
+
+export const temperatureFunctions: {
+  [key in TemperatureConversions]: (value: number) => number;
+} = {
+  [TemperatureConversions.CK]: (value: number): number => value + 273.15,
+  [TemperatureConversions.KC]: (value: number): number => value - 273.15,
+  [TemperatureConversions.CF]: (value: number): number => (value * 9) / 5 + 32,
+  [TemperatureConversions.FC]: (value: number): number =>
+    ((value - 32) * 5) / 9,
+  [TemperatureConversions.KF]: (value: number): number =>
+    ((value - 273.15) * 9) / 5 + 32,
+  [TemperatureConversions.FK]: (value: number): number =>
+    ((value - 32) * 5) / 9 + 273.15,
 };
 
 const unitsSchema: UnitsSchema = {
@@ -37,7 +80,7 @@ const unitsSchema: UnitsSchema = {
     { name: 'g', value: 1 },
     { name: 'mg', value: 0.001 },
     { name: 'μg', value: 0.0000001 },
-    { name: 'US ton', value: 907185 },
+    { name: 'US Ton', value: 907185 },
     { name: 'Stone', value: 6350.29 },
     { name: 'Pound', value: 453.592 },
     { name: 'Ounce', value: 28.3495 },
@@ -66,8 +109,8 @@ const unitsSchema: UnitsSchema = {
     { name: 'ms', value: 0.001 },
     { name: 'μs', value: 0.0000001 },
     { name: 'ns', value: 1.0000000001 },
-    { name: 'Min', value: 60.0 },
-    { name: 'Hour', value: 3600.0 },
+    { name: 'm', value: 60.0 },
+    { name: 'h', value: 3600.0 },
     { name: 'Day', value: 86400.0 },
     { name: 'Week', value: 604800.0 },
     { name: 'Month', value: 2629800.0 },
@@ -83,6 +126,11 @@ const unitsSchema: UnitsSchema = {
     { name: 'Square yard', value: 0.836127 },
     { name: 'Square foot', value: 0.092903 },
     { name: 'Square inch', value: 0.00064516 },
+  ],
+  [UnitsCategories.Temperature]: [
+    { name: 'C', value: 1 },
+    { name: 'K', value: 1 },
+    { name: 'F', value: 1 },
   ],
 };
 

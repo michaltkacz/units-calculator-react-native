@@ -3,12 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { List, TextInput } from 'react-native-paper';
 
 import DropDown from 'react-native-paper-dropdown';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { RootStackCalculatorProps } from '../stacks/RootStackScreen';
 
 import unitsSchema, {
+  TemperatureConversions,
+  temperatureFunctions,
   Unit,
   UnitsCategories,
   UnitsCollection,
@@ -37,6 +38,15 @@ const CalculatorScreen: React.FC<RootStackCalculatorProps> = ({ route }) => {
       return '';
     }
 
+    const currentUnitValueFloat = parseFloat(baseUnitValue);
+
+    if (unitsCategory === UnitsCategories.Temperature) {
+      const keyString = fromUnitName + toUnitName;
+      const keyEnum = keyString as keyof typeof TemperatureConversions;
+
+      return temperatureFunctions[keyEnum](currentUnitValueFloat).toFixed(9);
+    }
+
     const fromUnitFactor = unitsCollection.filter(
       (unit) => unit.name === fromUnitName
     )[0].value;
@@ -45,7 +55,6 @@ const CalculatorScreen: React.FC<RootStackCalculatorProps> = ({ route }) => {
       (unit) => unit.name === toUnitName
     )[0].value;
 
-    const currentUnitValueFloat = parseFloat(baseUnitValue);
     const returnUnitValueFloat =
       (currentUnitValueFloat * fromUnitFactor) / toUnitFactor;
     return returnUnitValueFloat.toFixed(9);

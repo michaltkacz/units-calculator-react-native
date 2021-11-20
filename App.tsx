@@ -2,11 +2,9 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   NavigationContainer,
-  DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
 import {
-  DarkTheme as PaperDarkTheme,
   DefaultTheme as PaperDefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
