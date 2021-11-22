@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { RootStackCategoriesProps, Routes } from '../stacks/RootStackScreen';
 import { UnitsCategories } from '../data/unitsSchema';
 
+const greyColor = '#9e9e9e';
+
 const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
   navigation,
 }) => {
@@ -16,7 +18,11 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
           titleStyle={styles.listItemTitle}
           title={UnitsCategories.Length}
           left={() => (
-            <Icon name='straighten' color='#000' style={styles.listItemIcon} />
+            <Icon
+              name='straighten'
+              color={greyColor}
+              style={styles.listItemIcon}
+            />
           )}
           onPress={() =>
             navigation.navigate(Routes.Calculator, {
@@ -28,7 +34,11 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
           titleStyle={styles.listItemTitle}
           title={UnitsCategories.Area}
           left={() => (
-            <Icon name='square-foot' color='#000' style={styles.listItemIcon} />
+            <Icon
+              name='square-foot'
+              color={greyColor}
+              style={styles.listItemIcon}
+            />
           )}
           onPress={() =>
             navigation.navigate(Routes.Calculator, {
@@ -40,7 +50,11 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
           titleStyle={styles.listItemTitle}
           title={UnitsCategories.Volume}
           left={() => (
-            <Icon name='opacity' color='#000' style={styles.listItemIcon} />
+            <Icon
+              name='opacity'
+              color={greyColor}
+              style={styles.listItemIcon}
+            />
           )}
           onPress={() =>
             navigation.navigate(Routes.Calculator, {
@@ -54,7 +68,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
           left={() => (
             <Icon
               name='fitness-center'
-              color='#000'
+              color={greyColor}
               style={styles.listItemIcon}
             />
           )}
@@ -68,7 +82,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
           titleStyle={styles.listItemTitle}
           title={UnitsCategories.Time}
           left={() => (
-            <Icon name='timer' color='#000' style={styles.listItemIcon} />
+            <Icon name='timer' color={greyColor} style={styles.listItemIcon} />
           )}
           onPress={() =>
             navigation.navigate(Routes.Calculator, {
@@ -80,7 +94,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
           titleStyle={styles.listItemTitle}
           title={UnitsCategories.Speed}
           left={() => (
-            <Icon name='speed' color='#000' style={styles.listItemIcon} />
+            <Icon name='speed' color={greyColor} style={styles.listItemIcon} />
           )}
           onPress={() =>
             navigation.navigate(Routes.Calculator, {
@@ -94,7 +108,7 @@ const CategoriesScreen: React.FC<RootStackCategoriesProps> = ({
           left={() => (
             <Icon
               name='device-thermostat'
-              color='#000'
+              color={greyColor}
               style={styles.listItemIcon}
             />
           )}
@@ -114,6 +128,7 @@ export default CategoriesScreen;
 const styles = StyleSheet.create({
   listItemTitle: {
     textTransform: 'capitalize',
+    fontSize: 20,
   },
-  listItemIcon: { fontSize: 32, paddingLeft: 12 },
+  listItemIcon: { fontSize: 40, paddingLeft: 12 },
 });

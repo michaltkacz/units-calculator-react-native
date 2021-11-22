@@ -82,7 +82,6 @@ const CalculatorScreen: React.FC<RootStackCalculatorProps> = ({ route }) => {
           />
           <View style={styles.unitDropDown}>
             <DropDown
-              label='Base Unit'
               mode='flat'
               visible={showDropDown}
               showDropDown={() => setShowDropDown(true)}
@@ -105,17 +104,9 @@ const CalculatorScreen: React.FC<RootStackCalculatorProps> = ({ route }) => {
               <List.Item
                 key={`unit-row-${index}`}
                 title={calculateValue(baseUnitName, unit.name)}
-                titleStyle={{ textAlign: 'right' }}
+                titleStyle={styles.listItemValue}
                 right={() => (
-                  <Text
-                    style={{
-                      minWidth: 130,
-                      textAlignVertical: 'center',
-                      paddingLeft: 16,
-                    }}
-                  >
-                    {unit.name}
-                  </Text>
+                  <Text style={styles.listItemUnit}>{unit.name}</Text>
                 )}
               ></List.Item>
             );
@@ -129,12 +120,22 @@ const CalculatorScreen: React.FC<RootStackCalculatorProps> = ({ route }) => {
 export default CalculatorScreen;
 
 const styles = StyleSheet.create({
-  inputView: { flexDirection: 'row', padding: 4 },
+  inputView: { flexDirection: 'row' },
 
   unitValueInput: {
     flex: 7,
+    textAlign: 'right',
+    color: '#000000',
   },
   unitDropDown: {
     flex: 3,
+    color: '#000000',
+  },
+  listItemValue: { textAlign: 'right' },
+  listItemUnit: {
+    minWidth: 130,
+    textAlignVertical: 'center',
+    paddingLeft: 16,
+    color: '#9e9e9e',
   },
 });

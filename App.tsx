@@ -11,21 +11,38 @@ import {
 
 import RootStackScreen from './src/stacks/RootStackScreen';
 
-const CombinedDefaultTheme = {
-  ...NavigationDefaultTheme,
+// const CombinedDefaultTheme = {
+//   ...NavigationDefaultTheme,
+//   colors: {
+//     ...NavigationDefaultTheme.colors,
+//     ...PaperDefaultTheme.colors,
+//     card: NavigationDefaultTheme.colors.primary,
+//   },
+// };
+
+const PaperTheme = {
   ...PaperDefaultTheme,
   colors: {
-    ...NavigationDefaultTheme.colors,
     ...PaperDefaultTheme.colors,
-    card: NavigationDefaultTheme.colors.primary,
+    text: '#9e9e9e',
+  },
+};
+
+const NavigationTheme = {
+  ...NavigationDefaultTheme,
+  colors: {
+    ...NavigationDefaultTheme.colors,
+    card: '#7920a0',
+    text: '#ffffff',
+    background: '#ffffff',
   },
 };
 
 export default function App() {
   return (
-    <PaperProvider theme={CombinedDefaultTheme}>
+    <PaperProvider theme={PaperTheme}>
       <SafeAreaProvider>
-        <NavigationContainer theme={CombinedDefaultTheme}>
+        <NavigationContainer theme={NavigationTheme}>
           <RootStackScreen />
         </NavigationContainer>
       </SafeAreaProvider>
