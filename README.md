@@ -1,6 +1,6 @@
-# Units Calculator - Java
+# Units Calculator - React Native
 
-> Java version of Units Calculator mobile app for Android system.
+> React Native version of Units Calculator mobile app for Android system.
 
 ## Other versions
 
