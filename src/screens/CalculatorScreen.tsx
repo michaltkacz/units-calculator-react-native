@@ -131,7 +131,9 @@ const styles = StyleSheet.create({
     flex: 3,
     color: '#000000',
   },
-  listItemValue: { textAlign: 'right' },
+  listItemValue: {
+    textAlign: 'right',
+  },
   listItemUnit: {
     minWidth: 130,
     textAlignVertical: 'center',
